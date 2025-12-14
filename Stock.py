@@ -6,10 +6,6 @@ st.title("Stock Price Analyzer")
 st.subheader("Analyze and visualize stock prices over time")
 # "yfinance" is a popular library to fetch financial data
 
-
-
-
-
 col1, col2, col3= st.columns(3)
 
 with col1:
@@ -17,15 +13,10 @@ with col1:
     "Please select the company",
     ("AAPL","GOOG","MSFT"),
 )
-
 with col2:
     sd = st.date_input("Start date", datetime.date(2024,10,1))
-
 with col3:
     ed = st.date_input("End date", datetime.date(2024,12,31))
-
-
-
 
 ticker=yf.Ticker(company_select)
 ticker_data=ticker.history( start=sd, end=ed)
@@ -38,5 +29,3 @@ st.line_chart(ticker_data["Close"])
 
 st.subheader("Volume traded over time")
 st.bar_chart(ticker_data["Volume"])
-
-
