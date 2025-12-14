@@ -43,32 +43,32 @@ encode_dict = {
 if st.button("Predict Price"):
     st.write("Predicting.....")
 
-# Convert the selected fuel type (categorical value) into its numerical encoded form
-# using the same encoding dictionary that was applied during model training
-encoded_fuel_type = encode_dict["fuel_type"][fuel_type]
+    # Convert the selected fuel type (categorical value) into its numerical encoded form
+    # using the same encoding dictionary that was applied during model training
+    encoded_fuel_type = encode_dict["fuel_type"][fuel_type]
 
-# Convert the selected transmission type (categorical value) into its numerical encoded form
-# to ensure consistency with the trained machine learning model
-encoded_transmission_type = encode_dict["transmission_type"][transmission_type]
+    # Convert the selected transmission type (categorical value) into its numerical encoded form
+    # to ensure consistency with the trained machine learning model
+    encoded_transmission_type = encode_dict["transmission_type"][transmission_type]
 
-# Create the input data in the exact order and format expected by the trained model
-# All values are placed inside a nested list because the model expects a 2D array
-input_data = [[
-    2012.0,                     # Year of manufacture of the car
-    2,                          # Number of previous owners
-    120000,                     # Total distance driven (in kilometers)
-    encoded_fuel_type,          # Encoded value of the fuel type
-    encoded_transmission_type,  # Encoded value of the transmission type
-    19.7,                       # Mileage of the car (km/l)
-    engine,                     # Engine capacity (in CC)
-    46.3,                       # Maximum power of the car (in bhp)
-    seats                       # Number of seats in the car
-]]
+    # Create the input data in the exact order and format expected by the trained model
+    # All values are placed inside a nested list because the model expects a 2D array
+    input_data = [[
+        2012.0,                     # Year of manufacture of the car
+        2,                          # Number of previous owners
+        120000,                     # Total distance driven (in kilometers)
+        encoded_fuel_type,          # Encoded value of the fuel type
+        encoded_transmission_type,  # Encoded value of the transmission type
+        19.7,                       # Mileage of the car (km/l)
+        engine,                     # Engine capacity (in CC)
+        46.3,                       # Maximum power of the car (in bhp)
+        seats                       # Number of seats in the car
+    ]]
 
-# Use the trained machine learning model to predict the car price
-# The result is returned as an array, even for a single prediction
-price = model.predict(input_data)
+    # Use the trained machine learning model to predict the car price
+    # The result is returned as an array, even for a single prediction
+    price = model.predict(input_data)
 
-# Display the predicted price on the Streamlit web interface
-# The price is formatted to two decimal places and shown in Lakhs
-st.header(f"Predicted Price: Rs {price[0]:.2f} Lakhs")
+    # Display the predicted price on the Streamlit web interface
+    # The price is formatted to two decimal places and shown in Lakhs
+    st.header(f"Predicted Price: Rs {price[0]:.2f} Lakhs")
